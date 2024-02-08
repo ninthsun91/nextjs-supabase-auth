@@ -15,7 +15,7 @@ export default function Form() {
       {verify && (
         <div>
           <label htmlFor="otp">OTP:</label>
-          <input className="border border-black" id="otp" name="otp" type="number" required />
+          <input className="border border-black" id="otp" name="otp" type="text" required />
         </div>
       )}
       
@@ -77,6 +77,7 @@ function VerifyButton({ email }: { email: string }) {
     }
 
     console.log('user: ', data);
+    location.href = '/';
   }
 
   return <button className="border border-black" formAction={verifyHandler}>Verify</button>;

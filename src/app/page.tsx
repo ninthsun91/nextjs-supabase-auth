@@ -1,11 +1,13 @@
-import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
+import { User } from '@supabase/supabase-js';
+import { createClient } from '@/lib/supabase/server';
+import ChatContainer from '@/component/chat/ChatContainer';
 
 export default async function Home() {
   const supabase = createClient();
   const { data } = await supabase.auth.getUser();
 
-  return data.user ? <SignedHome /> : <UnSignedHome />;
+  return data.user ? <SignedHome user={data.user} /> : <UnSignedHome />;
 }
 
 const UnSignedHome = () => {
@@ -26,14 +28,25 @@ const UnSignedHome = () => {
   );
 }
 
-const SignedHome = () => {
+const SignedHome = ({ user }: { user: User }) => {
   return (
-    <div className="flex flex-col items-center space-y-2">
-      <form action="/auth/signout" method="post">
-        <button className="border border-black button block" type="submit">
-          Sign out
-        </button>
-      </form>
+    <div className="border border-black">
+      <div className="flex flex-row justify-center items-center space-x-2">
+        <div id="profile" className="flex flex-col">
+          <div>Name: {user.user_metadata.name || '-'}</div>
+          <div>Email: {user.email || '-'}</div>
+        </div>
+        <form action="/auth/signout" method="post">
+          <button className="border border-black button block" type="submit">
+            Sign out
+          </button>
+        </form>
+      </div>
+
+      <main className="border border-black flex flex-row">
+        <ChatContainer />
+        <div id="doc-container" className="border border-green-500 flex-1"></div>
+      </main>
     </div>
   );
 }

@@ -22,6 +22,11 @@ export default async function Home() {
       <button className="border border-black p-1">
         <Link href="/login/otp">Email OTP Login</Link>
       </button>
+      <form action="/login/google" method="get">
+        <button className="border border-black p-1" type="submit">
+          Google OAuth2
+        </button>
+      </form>
     </div>
   );
 }

@@ -7,7 +7,7 @@ export default function Home() {
         <Link href="/login/password">Email & Password</Link>
       </button>
       <button className="border border-black p-1">
-        <Link href="/login">Email OTP Login</Link>
+        <Link href="/login/otp">Email OTP Login</Link>
       </button>
     </div>
   );

@@ -37,7 +37,7 @@ export default function ChatInput() {
     return () => {
       supabase.removeChannel(channel);
     }
-  }, [supabase, channel]);
+  }, [supabase]);
 
   return (
     <div id="chat-input" className="border border-black flex flex-row space-x-1">

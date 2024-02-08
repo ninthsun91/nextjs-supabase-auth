@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { User } from '@supabase/supabase-js';
 import { createClient } from '@/lib/supabase/server';
 import ChatContainer from '@/component/chat/ChatContainer';
+import DocContainer from '@/component/doc/DocContainer';
 
 export default async function Home() {
   const supabase = createClient();
@@ -45,7 +46,7 @@ const SignedHome = ({ user }: { user: User }) => {
 
       <main className="border border-black flex flex-row">
         <ChatContainer />
-        <div id="doc-container" className="border border-green-500 flex-1"></div>
+        <DocContainer />
       </main>
     </div>
   );

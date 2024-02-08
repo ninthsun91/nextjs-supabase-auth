@@ -4,17 +4,12 @@ import Link from 'next/link';
 export default async function Home() {
   const supabase = createClient();
   const { data } = await supabase.auth.getUser();
-  console.log('user: ', data.user);
 
-  return data.user ? (
-    <div className="flex flex-col items-center space-y-2">
-      <form action="/auth/signout" method="post">
-        <button className="border border-black button block" type="submit">
-          Sign out
-        </button>
-      </form>
-    </div>
-  ) : (
+  return data.user ? <SignedHome /> : <UnSignedHome />;
+}
+
+const UnSignedHome = () => {
+  return (
     <div className="flex flex-col items-center space-y-2">
       <button className="border border-black p-1">
         <Link href="/login/password">Email & Password</Link>
@@ -25,6 +20,18 @@ export default async function Home() {
       <form action="/login/google" method="get">
         <button className="border border-black p-1" type="submit">
           Google OAuth2
+        </button>
+      </form>
+    </div>
+  );
+}
+
+const SignedHome = () => {
+  return (
+    <div className="flex flex-col items-center space-y-2">
+      <form action="/auth/signout" method="post">
+        <button className="border border-black button block" type="submit">
+          Sign out
         </button>
       </form>
     </div>
